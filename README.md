@@ -42,7 +42,7 @@ Om de hero aan te kunnen passen moet er een two way binding aangemaakt worden. d
   <input id="name" [(ngModel)]="hero.name" placeholder="name">
 </div>
 ``` 
-Hiervoor moet nog wel de Forms module geimporteerd worden, zodat NgModel gebruikt kan worden. Zo herkend angular `ngModel` en kan het het gebruiken.
+Hiervoor moet nog wel de Forms module geimporteerd worden, zodat `ngModel` gebruikt kan worden. Zo herkend angular `ngModel` en kan het gebruikt worden.
 
 ## Tour of heroes 2 
 
@@ -78,8 +78,28 @@ Als dit dan verwerkt wordt in het stukje code dat geschreven was in ToH 1, ziet 
         </div>
 ```
 Zoals te zien is wordt de selected hero gebruikt die we in de eventhandler toewijzen. `*ngIf` zorgt ervoor dat er niet naar een ongedefinieerd object wijzen. Het checkt of er een `selectedHero` bestaat, zo ja, display de HTML code, zo niet, laat dan niks zien.
+
 ## Tour of heroes 3
 
-## Opdracht 2
+Als een applicatie aan het groeien is, is het onhandig om alle features in een component te houden omdat het dan niet onderhoudbaar is. Daarom is het handiger als een groot component in meerdere subcomponenten worden onderverdeeld.
+
+In dit geval zal de hero detail en input overgezet worden naar een HeroDetail component. Dit detail component wordt dan gebonden aan een input variable die gelijk staat aan het geselecteerde hero object:
+```html
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+``` 
+Dit hero object kan dan weer gebruikt worden in het detail component als volgt:
+
+```javascript
+@Input() hero?: Hero;
+```
+
+# Opdracht 2
+
+## Tour of heroes 4
+
+
+## Tour of heroes 5
+## Tour of heroes 6
+## Routing and navigation
 ## Opdracht 3
 ## Opdracht 4
