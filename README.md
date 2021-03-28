@@ -97,9 +97,69 @@ Dit hero object kan dan weer gebruikt worden in het detail component als volgt:
 
 ## Tour of heroes 4
 
+In ToH 4 staan services centraal. Maar waarom services? Services zijn singleton objecten die data vasthouden tijdens de lifecycle van de applicatie. Het doel van een service is het beschikbaar stellen van data tussen meerdere componenten in de Angular applicatie. Dit doen we door gebruik te maken van Angular's dependency injections.
+
+Om een service aan te maken, kan het volgende commando gebruikt worden:
+```
+ng generate service hero
+```
+De service klassen krijgen de `@Injectable` decorator. Dit zorgt ervoor dat de klasse mee wordt genomen in het dependency injection system van Angular, ookwel de provider genoemd. De service wordt meegegeven aan de constructor van een component, zodat deze gebruikt kan worden in de klasse.
+
+Om hier dan een kort voorbeeld bij te geven:
+```javascript
+export class HeroesComponent implements OnInit {
+  heroes: Hero[] = [];
+
+  constructor(private heroService: HeroService) { }
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
+
+  getHeroes(): void {
+    this.heroes = this.heroService.getHeroes();
+  }
+}
+```
+Om de data later van een database of remote server te kunnen halen, moet de `getHeroes` methode asynchroon gemaakt worden. Het halen van de data zal dan gedaan worden met een Http get methode die een observable terug geeft. Observables zijn in essentie interfaces die data asynchroon door kan sturen tussen klassen.
+
+Als een obeservable geimplementeerd is, kan een andere methode subscriben op deze observable om data op te halen:
+```javascript
+getHeroes(): void {
+  this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
+}
+```
 
 ## Tour of heroes 5
+In ToH 5 wordt de routing van een Angular applicatie besproken. 
+
+Om de routing van de site te regelen moet een routing module aangemaakt worden. Dit kan met het volgende commando:
+```
+ng generate module app-routing --flat --module=app
+```
+
+Sinds ik routing had aangezet tijdens het genereren van de initieele applicatie, was dit niet nodig voor mij.
+
+Routes kunnen makkelijk toegevoegd en gekoppeld worden aan components, door deze in de array aan routes toe te voegen:
+```javascript
+const routes: Routes = [
+  { path: 'heroes', component: HeroesComponent }
+];
+```
+
+Door het `<router-outlet>` element toe te voegen weet de router (in dit geval de app-routing module) waar de views gedisplayed moeten worden. Daarnaast kan er een nav balk toe worden gevoegd met een `routerLink` atribuut. dit zorgt ervoor dat de clickable knoppen of links naar de ingestelde route navigeren. Zie hier een voorbeeld:
+
+```html
+<nav>
+  <a routerLink="/heroes">Heroes</a>
+</nav>
+```
+
+
+
 ## Tour of heroes 6
-## Routing and navigation
-## Opdracht 3
-## Opdracht 4
+
+
+# Eindopdracht
