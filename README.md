@@ -161,5 +161,74 @@ Door het `<router-outlet>` element toe te voegen weet de router (in dit geval de
 
 ## Tour of heroes 6
 
+In de laatste tour of heroes opdracht staat een onderdeel centraal: HTTP services. Deze worden gebruikt om data te verzenden en te ontvangen naar/van een database, of om een andere informatiebron te benutten/voeden. Voor de tutorial wordt er gebruik gemaakt van een IMWA (in memory web api). Dit is een module die een Webapi simuleert. De IMWA vangt de HTTP services af en returned een gegenereerde response.
 
+Om http berichten te kunnen versturen moet als eerste een `HttpClient` aangemaakt worden. Dit kan simpel weg gedaan worden door de Service module er een mee te geven en een *in memory data service* aan te maken:
+
+Deze simuleert een web api waar tegen aan gepraat kan worden. 
+```javascript
+import { Injectable } from '@angular/core';
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Hero } from './hero';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class InMemoryDataService implements InMemoryDbService {
+  createDb() {
+    const heroes = [
+      { id: 1, name: 'Spider-man' },
+      { id: 2, name: 'Wolverine' },
+      { id: 3, name: 'Captain-America' },
+      { id: 4, name: 'Thor' },
+      { id: 5, name: 'Iron man' },
+      { id: 6, name: 'Black panther' },
+      { id: 7, name: 'Vision' },
+      { id: 8, name: 'Black widow' },
+      { id: 9, name: 'Hulk' },
+      { id: 10, name: 'Hawkeye' }
+    ];
+    return {heroes};
+  }
+  genId(heroes: Hero[]): number {
+    return heroes.length > 0 ? Math.max(...heroes.map(hero => hero.id)) + 1 : 11;
+  }
+}
+```
+Hier wordt de `HttpClient` meegegeven aan de Service classe, om zo over de hele applicatie de mogelijkheid te hebben deze aan te kunnen roepen.
+
+```javascript
+constructor(
+  private http: HttpClient,
+  private messageService: MessageService) { }
+```
+
+Met deze `HttpClient` kunnen alle http methodes aangeroepen worden, een aantal voorbeelden hiervan zijn:
+```javascript
+    //GET
+    return this.http.get<Hero[]>(this.heroesUrl)
+    //PUT
+    return this.http.put(this.heroesUrl, hero, this.httpOptions)
+    //POST
+    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions)
+    //DELETE
+    return this.http.delete<Hero>(url, this.httpOptions)
+```
+In de components subscribe je een methode dan om een object in de database te kunnen manipuleren/ophalen zoals het toevoegen van een hero:
+```javascript
+add(name: string): void {
+  name = name.trim();
+  if (!name) { return; }
+  this.heroService.addHero({ name } as Hero).subscribe(hero => {
+      this.heroes.push(hero);
+    });
+}
+```
+
+Aangezien dit allemaal Observables zijn, is er ook een mogelijkheid om mee te kunnen kijken (met de `tap()` functie) en errors op te vangen (met de `catchError`) met de `pipe()` methode van de Observables:
+```javascript
+ return this.http.get<Hero[]>(this.heroesUrl)
+    .pipe(tap(_ => this.log('fetched heroes')),
+      catchError(this.handleError<Hero[]>('getHeroes', []))
+```
 # Eindopdracht
