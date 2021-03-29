@@ -9,6 +9,7 @@ import { StudentVerschuldigdComponent } from './student-verschuldigd/student-ver
 import { NgxCurrencyModule, CurrencyMaskInputMode } from "ngx-currency";
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 export const customCurrencyMaskConfig = {
@@ -36,7 +37,11 @@ export const customCurrencyMaskConfig = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

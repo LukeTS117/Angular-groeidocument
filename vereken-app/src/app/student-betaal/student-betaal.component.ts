@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventHandlerService } from '../services/event-handler.service';
 import { HttpServiceService } from '../services/http-service.service';
 import { Student } from '../student';
 
@@ -9,26 +10,25 @@ import { Student } from '../student';
 })
 export class StudentBetaalComponent implements OnInit {
 
-  students: Student[];
+  students!: Student[];
 
-  constructor(private httpService: HttpServiceService) { }
+  constructor(private httpService: HttpServiceService, private eventHandler: EventHandlerService) { }
+
+  ngOnInit(): void {
+    this.getStudents();
+  }
 
   addStudent(name: string, owed: number): void {
     name = name.trim();
     if (!name) { return; }
     this.httpService.addStudent({ name, owed } as Student)
-      .subscribe(hero => {
-        this.students.push(hero);
+      .subscribe(data => {
+        this.eventHandler.emitEvent();
       });
   }
 
   getStudents(): void{
     this.httpService.getStudents().subscribe(students => this.students = students);
   }
-
-  ngOnInit(): void {
-    this.getStudents();
-  }
-
-
+  
 }
