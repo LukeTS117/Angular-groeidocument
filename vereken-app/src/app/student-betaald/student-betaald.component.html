@@ -1,5 +1,26 @@
-<ul>
-    <li *ngFor="let student of students">
-        <span>{{student.name}} - {{student.owed}}</span>
-    </li>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h1>Studenten inleg</h1>
+            <ul>
+                <li *ngFor="let student of students">
+                    <span>{{student.name}} - {{student.amount}}</span>
+                </li>
+            </ul>
+            <h2>Totaal: {{total | number:'.2'}}</h2> 
+        </div>
+        <div class="col-sm"> 
+            <h2>Wie betaald wie</h2>
+            <ul>
+                <li *ngFor="let payment of payments">
+                    <span>{{payment.payer}} betaald {{payment.amount | number:'.1'}} aan {{payment.reciever}}</span>
+                </li>
+           </ul>
+        </div>
+    </div>
+        
+    
+    
+    
+</div>
+

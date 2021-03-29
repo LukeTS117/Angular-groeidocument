@@ -1,5 +1,10 @@
-export interface Student {
+export class Student {
     id: number;
     name: string;
-    owed: number;
+    amount: number;
+
+    constructor(name: string, amount: number){
+        this.name = name;
+        this.amount = amount;
+    }
 }

@@ -1,8 +1,8 @@
 <div>
-    <input placeholder="Naam" for="new-student" #studentName/>
+    <input placeholder="Naam" for="new-student" #studentName type="string"/>
 </div>
 <div>
-    <input placeholder="Bedrag" for="new-student" #studentOwed currencyMask formControlName="value"/>
+    <input placeholder="Bedrag" #studentOwed type='number'/>
 </div>
 <button (click)="addStudent(studentName.value, studentOwed.value); studentName.value=''; studentOwed.value=''">Toevoegen</button>
 

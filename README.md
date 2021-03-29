@@ -244,12 +244,10 @@ Daarnaast had ik een service nodig die de algoritmiek van het berekenen kon uitv
 Als eerste ben ik aan de slag gegaan met het opzetten van een manier van opslaan en displayen. Dit heb ik gedaan door een IMWA toe te voegen. Ik heb voor een IMWA gekozen omdat ik in tijdsnood kwam voor de deadline en toch Http services toe wilde passen. Voor het displayen en inputten van data heb ik 3 modules aangemaakt:
 - een student-betaal module, deze behandeld de input van de gebruiker
 - een student-betaald component, Deze haalt de ingevoerde data op en displayed deze.
-- een student-verschuldigd component. Deze zal de berekeningen tonen van de studenten die iemand iets verschuldigd zijn.
 
 Daarna heb ik 4 services aangemaakt en een IMWA geimplementeerd:
 - een event-handler service, om data tussen componenten uit te kunnen wisselen
 - een http-service service, (ja de naam was niet erg handig, hier kwam ik echter pas te laat achter) om CRUD operaties uit te kunnen voeren
 - een in-memory-data service, om mijn IMWA zijn data base te runnen
-- een student-betaal service, (ook deze naamgeving was niet zo handig in combinatie met de component) om te berekenen wat de studenten elkaar verschuldigd waren.
 
-Tussen de student-betaal component en de student-betaald component heb ik een evenEmitter gebruikt. Dit heb ik gedaan om de data uit de datbase opnieuw op te halen wanneer hij geupdate wordt. Zo hoeft de gebruiker niet ouderwets op een refresh knop te drukken en wordt de lijst automatisch geupdate.
+Tussen de student-betaal component en de student-betaald component heb ik een eventEmitter gebruikt. Dit heb ik gedaan om de data uit de datbase opnieuw op te halen wanneer hij geupdate wordt. Zo hoeft de gebruiker niet ouderwets op een refresh knop te drukken en worden de lijsten automatisch geupdate.

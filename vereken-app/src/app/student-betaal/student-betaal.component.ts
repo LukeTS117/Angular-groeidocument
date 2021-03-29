@@ -18,14 +18,16 @@ export class StudentBetaalComponent implements OnInit {
     
   }
 
-  addStudent(name: string, owed: number): void {
+  addStudent(name: string, amount: number): void {
     name = name.trim();
     if (!name) { return; }
-    this.httpService.addStudent({ name, owed } as Student)
+    if (!amount) { return; }
+    this.httpService.addStudent({ name, amount } as Student)
       .subscribe(data => {
         this.eventHandler.emitEvent();
       });
   }
+
 
   
 }

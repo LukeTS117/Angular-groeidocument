@@ -1,0 +1,17 @@
+.main{
+    text-align: center;
+    top: 25vh;
+    background-color: lightgray;
+    margin-top: 25vh;
+    height: auto;
+    width: 50vw;
+    padding-top: 10px;
+}
+
+.input{
+    text-align: left;
+}
+
+.lists{
+    text-align: left;
+}
