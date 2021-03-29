@@ -232,3 +232,13 @@ Aangezien dit allemaal Observables zijn, is er ook een mogelijkheid om mee te ku
       catchError(this.handleError<Hero[]>('getHeroes', []))
 ```
 # Eindopdracht
+
+Als eerste heb ik het overal design bedacht van de verken app, dus welke components ik moet aan gaan maken en welke services. Hieruit kon ik beredeneren dat er voor de components:
+
+1. Een student-betaal component
+2. Een student-betaald component
+3. Een student-verschuldigd component
+
+Daarnaast had ik een service nodig die de algoritmiek van het berekenen kon uitvoeren, dus heb ik een `studenten-betaal-service` aangemaakt.
+
+Als eerste ben ik aan de slag gegaan met de layout en logica voor de student-betaal component. 
