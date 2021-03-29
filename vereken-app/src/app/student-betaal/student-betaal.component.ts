@@ -15,7 +15,7 @@ export class StudentBetaalComponent implements OnInit {
   constructor(private httpService: HttpServiceService, private eventHandler: EventHandlerService) { }
 
   ngOnInit(): void {
-    this.getStudents();
+    
   }
 
   addStudent(name: string, owed: number): void {
@@ -27,8 +27,5 @@ export class StudentBetaalComponent implements OnInit {
       });
   }
 
-  getStudents(): void{
-    this.httpService.getStudents().subscribe(students => this.students = students);
-  }
   
 }

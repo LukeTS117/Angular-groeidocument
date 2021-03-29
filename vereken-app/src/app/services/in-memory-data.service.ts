@@ -9,14 +9,6 @@ import { Student } from '../student';
 export class InMemoryDataService implements InMemoryDbService{
   createDb(){
     const students = [
-      {id: 1, name: 'jake', owed: 50.00},
-      {id: 2, name: 'jhon', owed: 50.00},
-      {id: 3, name: 'jones', owed: 50.00},
-      {id: 4, name: 'luke', owed: 50.00},
-      {id: 5, name: 'ads', owed: 50.00},
-      {id: 6, name: 'je', owed: 50.00},
-      {id: 7, name: 'qwe', owed: 50.00},
-
     ];
     return {students};
   }
