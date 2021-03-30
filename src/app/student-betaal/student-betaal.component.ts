@@ -8,6 +8,7 @@ import { Student } from '../student';
   templateUrl: './student-betaal.component.html',
   styleUrls: ['./student-betaal.component.css']
 })
+//small but insignificant change
 export class StudentBetaalComponent implements OnInit {
 
   students!: Student[];
