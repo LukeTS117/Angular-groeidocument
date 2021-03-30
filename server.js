@@ -13,7 +13,7 @@ app.use(requireHTTPS);
 app.use(express.static('dist/vereken-app/styles.d72f14b8a9073c707743.css'));
 
 app.get('/*', function(req, res) {
-    res.sendFile('index.html', {root: 'dist/vereken-app/index.html'});
+    res.sendFile('index.html', {root: 'dist/vereken-app/'});
 });
 
 app.listen(process.env.PORT || 8080);
