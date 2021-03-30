@@ -244,14 +244,18 @@ Als eerste ben ik aan de slag gegaan met het opzetten van een manier van opslaan
 - een student-betaal module, deze behandeld de input van de gebruiker
 - een student-betaald component, Deze haalt de ingevoerde data op en displayed deze.
 
-Daarna heb ik 3 services aangemaakt en een IMWA geimplementeerd:
+Daarna heb ik 3 services aangemaakt en een IMWA geimplementeerd (voor de gedeployde website):
 - een event-handler service, om data tussen componenten uit te kunnen wisselen
 - een http-service service, (ja de naam was niet erg handig, hier kwam ik echter pas te laat achter) om CRUD operaties uit te kunnen voeren
 - een in-memory-data service, om mijn IMWA zijn data base te runnen
 
 Tussen de student-betaal component en de student-betaald component heb ik een eventEmitter gebruikt. Dit heb ik gedaan om de data uit de datbase opnieuw op te halen wanneer hij geupdate wordt. Zo hoeft de gebruiker niet ouderwets op een refresh knop te drukken en worden de lijsten automatisch geupdate.
 
-Om het design toch nog wat op te maken en responsive te maken heb ik bootstrap gebruikt. Het grid systeem van bootstrap kan makkelijk de data herinschikken om deze responsive te maken. Daarnaast heeft het ook nog een fijne opmaak voor lettertypen en knoppen
+Om het design toch nog wat op te maken en responsive te maken heb ik bootstrap gebruikt. Het grid systeem van bootstrap kan makkelijk de data herinschikken om deze responsive te maken. Daarnaast heeft het ook nog een fijne opmaak voor lettertypen en knoppen.
+
+Als input validatie heb ik heel simpel een type aangegeven in de html en een `required` attribuut vermeld voor de input.
+
+Ik heb de website (gedeeltelijk, vanwege de backend) gedeployed op heroku. onder: https://verkenen-app.herokuapp.com/
 
 Voor het algoritme heb ik het volgende gedaan:
 Als eerste heb ik het totaal berekend. Dit geeft het totale aantal geld dat 'verbrast' is op een avond .Daarna ben ik begonnen aan het algoritme. Het idee van het algortime is simpel en wordt in een aantal stappen uitgevoerd:
@@ -289,4 +293,6 @@ Als eerste heb ik het totaal berekend. Dit geeft het totale aantal geld dat 'ver
     return payments;
   }
 ```
+
+Als laatste is het me net optijd gelukt, een klein backendje op te zetten. Dit doe ik met een node.js server en een mongodb atlas DB. Ik heb geen poging gedaan om de berekening op de server te zetten, aangezien ik hier te weinig tijd voor had. Daarnaast kan een gebruiker ook op de applicatie met backend helaas niet het amount updaten bij een dezelfde ingevoerde naam. 
 
