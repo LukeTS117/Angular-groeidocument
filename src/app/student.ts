@@ -1,5 +1,4 @@
 export class Student {
-    id: number;
     name: string;
     amount: number;
 

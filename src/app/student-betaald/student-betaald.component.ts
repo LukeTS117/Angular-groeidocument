@@ -23,7 +23,6 @@ export class StudentBetaaldComponent implements OnInit {
   ngOnInit(): void {
     this.getStudents();
     this.eventHandler.$reloadEvent.subscribe(data => this.getStudents());
-    
   }
 
   getStudents(): void{

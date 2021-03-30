@@ -12,6 +12,8 @@ import { Student } from '../student';
 export class StudentBetaalComponent implements OnInit {
 
   students!: Student[];
+  name: String;
+  amount: number;
 
   constructor(private httpService: HttpServiceService, private eventHandler: EventHandlerService) { }
 
@@ -19,6 +21,7 @@ export class StudentBetaalComponent implements OnInit {
     
   }
 
+  
   addStudent(name: string, amount: number): void {
     name = name.trim();
     if (!name) { return; }

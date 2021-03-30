@@ -1,8 +1,7 @@
 <div>
-    <input placeholder="Naam" for="new-student" #studentName type="string"/>
+    <input placeholder="Naam" for="new-student" #studentName type="string" required/>
 </div>
 <div>
-    <input placeholder="Bedrag" #studentOwed type='number'/>
+    <input placeholder="Bedrag" #studentOwed type='number' required/>
 </div>
 <button (click)="addStudent(studentName.value, studentOwed.value); studentName.value=''; studentOwed.value=''">Toevoegen</button>
-

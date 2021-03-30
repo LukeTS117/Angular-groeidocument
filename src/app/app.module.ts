@@ -7,7 +7,6 @@ import { StudentBetaalComponent } from './student-betaal/student-betaal.componen
 import { StudentBetaaldComponent } from './student-betaald/student-betaald.component';
 import { NgxCurrencyModule } from "ngx-currency";
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -26,10 +25,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     NgxCurrencyModule,
     HttpClientModule,
-    FormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
