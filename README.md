@@ -233,21 +233,60 @@ Aangezien dit allemaal Observables zijn, is er ook een mogelijkheid om mee te ku
 ```
 # Eindopdracht
 
-Als eerste heb ik het overal design bedacht van de verken app, dus welke components ik moet aan gaan maken en welke services. Hieruit kon ik beredeneren dat er voor de components:
+Als eerste heb ik het overal design bedacht van de verken app, dus welke components ik moet aan gaan maken en welke services. Hieruit kon ik beredeneren dat er twee components aangemaakt moesten worden:
 
 1. Een student-betaal component
 2. Een student-betaald component
-3. Een student-verschuldigd component
 
 Daarnaast had ik een service nodig die de algoritmiek van het berekenen kon uitvoeren, dus heb ik een `studenten-betaal-service` aangemaakt.
 
-Als eerste ben ik aan de slag gegaan met het opzetten van een manier van opslaan en displayen. Dit heb ik gedaan door een IMWA toe te voegen. Ik heb voor een IMWA gekozen omdat ik in tijdsnood kwam voor de deadline en toch Http services toe wilde passen. Voor het displayen en inputten van data heb ik 3 modules aangemaakt:
+Als eerste ben ik aan de slag gegaan met het opzetten van een manier van opslaan en displayen. Dit heb ik gedaan door een IMWA toe te voegen. Ik heb voor een IMWA gekozen omdat ik in tijdsnood kwam voor de deadline en toch Http services toe wilde passen. Voor het displayen en inputten van data heb ik 2 modules aangemaakt:
 - een student-betaal module, deze behandeld de input van de gebruiker
 - een student-betaald component, Deze haalt de ingevoerde data op en displayed deze.
 
-Daarna heb ik 4 services aangemaakt en een IMWA geimplementeerd:
+Daarna heb ik 3 services aangemaakt en een IMWA geimplementeerd:
 - een event-handler service, om data tussen componenten uit te kunnen wisselen
 - een http-service service, (ja de naam was niet erg handig, hier kwam ik echter pas te laat achter) om CRUD operaties uit te kunnen voeren
 - een in-memory-data service, om mijn IMWA zijn data base te runnen
 
 Tussen de student-betaal component en de student-betaald component heb ik een eventEmitter gebruikt. Dit heb ik gedaan om de data uit de datbase opnieuw op te halen wanneer hij geupdate wordt. Zo hoeft de gebruiker niet ouderwets op een refresh knop te drukken en worden de lijsten automatisch geupdate.
+
+Om het design toch nog wat op te maken en responsive te maken heb ik bootstrap gebruikt. Het grid systeem van bootstrap kan makkelijk de data herinschikken om deze responsive te maken. Daarnaast heeft het ook nog een fijne opmaak voor lettertypen en knoppen
+
+Voor het algoritme heb ik het volgende gedaan:
+Als eerste heb ik het totaal berekend. Dit geeft het totale aantal geld dat 'verbrast' is op een avond .Daarna ben ik begonnen aan het algoritme. Het idee van het algortime is simpel en wordt in een aantal stappen uitgevoerd:
+1. als eerste wordt het gemiddelde berekend, dit gebeurd door de totaal som van het geld te delen door het aantal studenten.
+2. Er worden twee lijsten aangemaakt: eentje met verschuldigde en eentje met ontvangende studenten. Dit wordt berekend door het geld dat de studenten hebben ingelegd, af te trekken van het gemiddelde
+3. Deze twee lijsten gaan dan een while loop in die uiteindelijk een lijst met betalingen terug geeft:
+```javascript
+    //de studenten worden van hoog naar laag gesorteerd, zodat het algoritme minder berekeningen uit hoeft te voeren
+    studentDebt.sort((a, b) => (a.amount - b.amount));
+    studentTrust.sort((a, b) => (a.amount - b.amount));
+
+    while(studentDebt.length > 0 && studentTrust.length > 0 ){
+      //hier worden de hoogste schuld en het hoogste crediet gepakt
+      let reciever = studentTrust[0];
+      let payer = studentDebt[0];
+
+      //is de schuld groter of gelijk aan de crediet waarde:
+      if(payer.amount >= reciever.amount) {
+        //voeg een payment toe met het aantal dat verkregen wordt
+        payments.push(new owed(payer.name, reciever.amount, reciever.name));
+        //is de schuld hoger, voeg dan opnieuw de debuteur toe aan het lijstje - de schuld die al is afbetaald
+        if (payer.amount > reciever.amount) {
+          studentDebt.push(new Student(payer.name, payer.amount - reciever.amount));
+        }
+      //als de schuld kleiner is dan de crediet waarde, betaal dan de schuld, haal deze van de crediet waarde af en voeg de student weer toe aan de lijst. Voeg een payment toe aan de payment lijst.
+      }  else if (payer.amount < reciever.amount){
+        payments.push(new owed(payer.name, payer.amount, reciever.name));
+        studentTrust.push(new Student(reciever.name, reciever.amount - payer.amount));
+      } 
+      //verwijder de huidige debuteur en creditwaardige
+      studentDebt.splice(studentDebt.indexOf(payer), 1);
+      studentTrust.splice(studentTrust.indexOf(reciever), 1);
+    }
+
+    return payments;
+  }
+```
+
